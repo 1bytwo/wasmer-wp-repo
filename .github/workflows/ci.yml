@@ -29,3 +29,15 @@ jobs:
           extensions: mbstring, intl
       - name: Deploy app to Wasmer Edge
         run: wasmer deploy --token=${{ secrets.WASMER_CIUSER_PROD_TOKEN }} --non-interactive --no-wait --no-persist-id
+
+  run-bash:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Run Bash Command
+        run: |
+          echo "Running commands on GitHub Actions"
+          mysql --version
+          ls -la
