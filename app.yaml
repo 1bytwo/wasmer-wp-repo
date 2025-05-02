@@ -1,6 +1,6 @@
 kind: wasmer.io/App.v0
 name: wordpress
-owner: wasmer-examples
+owner: 1bytwo
 package: .
 volumes:
   - name: wp-content
@@ -37,5 +37,3 @@ capabilities:
         value: text/html
       - name: Accept-Language
         value: en-US
-- name: Debug User Info
-  run: wasmer whoami
