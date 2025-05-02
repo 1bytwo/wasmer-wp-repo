@@ -1,9 +1,17 @@
 kind: wasmer.io/App.v0
-name: beta
+name: wordpress
 owner: dexter404
-package: sha256:1fc0cca06ccb5565d6f7ef4cae2f1309e67e2d3c0cdb0ab53dfa04379b072841
+package: .
+volumes:
+  - name: wp-content
+    mount: /app/wp-content
+scaling:
+  mode: single_concurrency
 capabilities:
+  database:
+    engine: mysql
   instaboot:
+    max_age: 59m
     requests:
     - path: /
       headers:
@@ -11,29 +19,3 @@ capabilities:
         value: text/html
       - name: Accept-Language
         value: en-US
-    - path: /
-      headers:
-      - name: Accept
-        value: text/html
-      - name: Accept-Language
-        value: en-US
-    - path: /
-      headers:
-      - name: Accept
-        value: text/html
-      - name: Accept-Language
-        value: en-US
-    - path: /
-      headers:
-      - name: Accept
-        value: text/html
-      - name: Accept-Language
-        value: en-US
-    max_age: '59m'
-  database:
-    engine: mysql
-volumes:
-- name: wp-content
-  mount: /app/wp-content
-scaling:
-  mode: single_concurrency
