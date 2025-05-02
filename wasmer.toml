@@ -8,7 +8,6 @@ entrypoint = "run"
 
 [fs]
 "/app" = "app"
-"/db" = "db"
 "/config" = "config"
 
 [[command]]
