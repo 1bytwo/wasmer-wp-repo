@@ -54,7 +54,7 @@ define('DB_DIR', dirname(dirname(__FILE__)) . '/db/');
  * the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}.
  *
  * You can change these at any point in time to invalidate all existing cookies.
- * This will force all users to have to log in again.
+ * This will force all users to have to log-in again.
  *
  * @since 2.6.0
  */
@@ -95,7 +95,10 @@ $table_prefix = 'wp_';
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-define( 'WP_DEBUG', false );
+define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_DEBUG_DISPLAY', false );
+@ini_set( 'display_errors', 0 );
 
 /* Add any custom values between this line and the "stop editing" line. */
 
