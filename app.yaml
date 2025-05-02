@@ -2,8 +2,16 @@ kind: wasmer.io/App.v0
 name: beta
 owner: dexter404
 package: sha256:24895ab8ddc76d6adc5557133ee3ec0c1691f0edbc0796db5070dc19178a1981
+volumes:
+  - name: wp-content
+    mount: /app/wp-content
+scaling:
+  mode: single_concurrency
 capabilities:
+  database:
+    engine: mysql
   instaboot:
+    max_age: 59m
     requests:
     - path: /
       headers:
@@ -29,11 +37,3 @@ capabilities:
         value: text/html
       - name: Accept-Language
         value: en-US
-    max_age: '59m'
-  database:
-    engine: mysql
-volumes:
-- name: wp-content
-  mount: /app/wp-content
-scaling:
-  mode: single_concurrency
