@@ -11,7 +11,7 @@ else {
     /**
      * Installs the site.
      *
-     * Runs the required functions to set up and populate the database,
+     * Runs the required dx functions to set up and populate the database,
      * including primary admin user and initial options.
      *
      * @since 2.1.0
