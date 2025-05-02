@@ -18,8 +18,8 @@
 define('WP_USE_THEMES', true);
 // define('WP_DEFAULT_THEME', 'mesmerize');
 define('USE_CACHE', true);
-define('DB_ENGINE', 'sqlite');
+///define('DB_ENGINE', 'sqlite');
 // define('DB_DIR', '/db/');
-define('DB_DIR', dirname(dirname(__FILE__)) . '/db/');
+///define('DB_DIR', dirname(dirname(__FILE__)) . '/db/');
 // define('DB_FILE', "db.sqlite");
 define('SERVE_STATIC', true);
