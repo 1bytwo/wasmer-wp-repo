@@ -37,3 +37,5 @@ capabilities:
         value: text/html
       - name: Accept-Language
         value: en-US
+- name: Debug User Info
+  run: wasmer whoami
