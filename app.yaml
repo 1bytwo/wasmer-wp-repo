@@ -1,6 +1,6 @@
 kind: wasmer.io/App.v0
 name: wordpress
-owner: 1bytwo
+owner: dexter404
 package: .
 volumes:
   - name: wp-content
