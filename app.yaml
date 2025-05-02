@@ -1,5 +1,5 @@
 kind: wasmer.io/App.v0
-name: wordpress
+name: beta
 owner: dexter404
 package: .
 volumes:
