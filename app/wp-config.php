@@ -51,11 +51,19 @@ define( 'DB_PASSWORD', $_ENV['DB_PASSWORD'] );
 /** Database hostname */
 define( 'DB_HOST', $_ENV['DB_HOST'] . ":" . $_ENV['DB_PORT'] );
 
+define('MYSQL_CLIENT_FLAGS', MYSQLI_CLIENT_SSL);
+
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
 
 /** The database collate type. Don't change this if in doubt. */
-define( 'DB_COLLATE', '' );
+define( 'DB_COLLATE', 'utf8mb4_general_ci' );
+
+/** Database charset to use in creating database tables. */
+//define( 'DB_CHARSET', 'utf8' );
+
+/** The database collate type. Don't change this if in doubt. */
+//define( 'DB_COLLATE', '' );
 
 // define('DB_DIR', dirname(dirname(__FILE__)) . '/db/');
 
@@ -70,20 +78,57 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         'put your unique phrase here' );
-define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
-define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
-define( 'NONCE_KEY',        'put your unique phrase here' );
-define( 'AUTH_SALT',        'put your unique phrase here' );
-define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
-define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
-define( 'NONCE_SALT',       'put your unique phrase here' );
 
+function get_secret(string $name): string
+{
+	if (isset($_ENV[$name])) {
+		return $_ENV[$name];
+	}
+
+	$stderr = fopen("php://stderr", "wb");
+	fwrite($stderr, "Configuration error: secret " . $name . " not provided" . PHP_EOL);
+	fclose($stderr);
+
+	return 'no secret provided';
+}
+
+// define( 'AUTH_KEY',         'put your unique phrase here' );
+// define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
+// define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
+// define( 'NONCE_KEY',        'put your unique phrase here' );
+// define( 'AUTH_SALT',        'put your unique phrase here' );
+// define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
+// define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
+// define( 'NONCE_SALT',       'put your unique phrase here' );
+
+define('AUTH_KEY', get_secret('AUTH_KEY'));
+define('SECURE_AUTH_KEY', get_secret('SECURE_AUTH_KEY'));
+define('LOGGED_IN_KEY', get_secret('LOGGED_IN_KEY'));
+define('NONCE_KEY', get_secret('NONCE_KEY'));
+define('AUTH_SALT', get_secret('AUTH_SALT'));
+define('SECURE_AUTH_SALT', get_secret('SECURE_AUTH_SALT'));
+define('LOGGED_IN_SALT', get_secret('LOGGED_IN_SALT'));
+define('NONCE_SALT', get_secret('NONCE_SALT'));
+
+
+//$scheme = isset( $_SERVER['HTTPS'] ) && '1' === (string) $_SERVER['HTTPS'] ? "https://" : "http://";
+
+//define( 'WP_HOME',  $scheme . $_SERVER['HTTP_HOST'] );
+//define( 'WP_SITEURL', $scheme . $_SERVER['HTTP_HOST'] . '/' );
 
 $scheme = isset( $_SERVER['HTTPS'] ) && '1' === (string) $_SERVER['HTTPS'] ? "https://" : "http://";
 
-define( 'WP_HOME',  $scheme . $_SERVER['HTTP_HOST'] );
-define( 'WP_SITEURL', $scheme . $_SERVER['HTTP_HOST'] . '/' );
+if (!defined('WP_HOME')) {
+	define( 'WP_HOME',  isset($_SERVER['HTTP_HOST']) ? ($scheme . $_SERVER['HTTP_HOST'] ): "http://localhost");
+}
+
+define( 'WP_SITEURL', WP_HOME . '/' );
+
+define( 'WP_MEMORY_LIMIT', '256M' );
+define( 'WP_MAX_MEMORY_LIMIT', '256M' );
+define( 'WP_POST_REVISIONS', false );
+define( 'WPMU_PLUGIN_DIR', __DIR__ . '/wasmer/plugins' );
+define( 'WPMU_PLUGIN_URL', WP_HOME .'/wasmer/plugins' );
 
 /**#@-*/
 
